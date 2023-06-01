@@ -5,8 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <header>
+      <h1>First comes, Rock</h1>
+    </header>
+    <section>
+      <!--BATTLE-->
+      <div id="menu">
+        <span>Rounds to play:</span>
+        <input type="text" />
+        <button id="play-button">Play</button>
+      </div>
+      <div id="battle-field" class="hidden">
+        <div>
+          <p id="board">
+            You: <span id="player-choice">__</span> | Computer:
+            <span>__</span> || Winner: <span id="result">__</span>
+          </p>
+        </div>
+        <div>
+          <p>
+            Round: <span id="round-current">1</span> /
+            <span id="round-count">10</span>
+          </p>
+        </div>
+        <div id="buttons">
+          <button data-value="rock">Rock</button>
+          <button data-value="paper">Paper</button>
+          <button data-value="scissors">Scissors</button>
+        </div>
+        <div>
+          <button id="back-button">Back to Menu</button>
+        </div>
+      </div>
+    </section>
     <script src="./main.js"></script>
   </body>
 </html>

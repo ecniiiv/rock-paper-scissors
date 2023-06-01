@@ -1,7 +1,29 @@
+const buttons = document.querySelectorAll("#buttons button");
+const result = document.querySelector("#result");
+const menu = document.querySelector("#menu");
+const battleField = document.querySelector("#battle-field");
+const playButton = document.querySelector("#play-button");
+const backButton = document.querySelector("#back-button");
+
+playButton.addEventListener("click", () => {
+  battleField.classList.toggle("hidden");
+  menu.classList.toggle("hidden");
+});
+
+backButton.addEventListener("click", () => {
+  battleField.classList.toggle("hidden");
+  menu.classList.toggle("hidden");
+});
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const playerChoice = btn.dataset.value;
+    play(playerChoice, getComputerChoice());
+  });
+});
+
 function getComputerChoice() {
   const choice = Math.floor(Math.random() * 3) + 1;
-  console.log(choice);
-
   if (choice === 1) {
     return "rock";
   } else if (choice === 2) {
@@ -20,24 +42,14 @@ function play(playerChoice, computerChoice) {
     (player === "scissors" && computer === "paper") ||
     (player === "paper" && computer === "rock")
   ) {
-    console.log("Winner: Player");
+    result.innerText = "Player";
   } else if (
     (computer === "rock" && player === "scissors") ||
     (computer === "scissors" && player === "paper") ||
     (computer === "paper" && player === "rock")
   ) {
-    console.log("Winner: Computer");
+    result.innerText = "Computer";
   } else if (player === computer) {
-    console.log("Draw");
-  } else {
-    console.log("invalid choice");
-  }
-}
-
-function game(rounds) {
-  for (let i = 0; i < rounds; i++) {
-    const playerChoice = prompt("Rock, Paper or Scissors? :");
-
-    play(playerChoice, getComputerChoice());
+    result.innerText = "Draw";
   }
 }
