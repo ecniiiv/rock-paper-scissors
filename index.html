@@ -5,8 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>First comes, Rock</h1>
+      </header>
+      <main>
+        <!-- MENU -->
+        <section id="menu" class="menu">
+          <h1>Choose How Many Rounds</h1>
+          <div id="round-count-btns" class="round-count-btns">
+            <button data-count="5">5</button>
+            <button data-count="10">10</button>
+            <button data-count="20">20</button>
+          </div>
+          <button id="play-button" class="play-button">Play</button>
+        </section>
+
+        <!-- Battle Field -->
+        <section id="battle-field" class="hidden battle-field">
+          <div id="board" class="board">
+            <p>
+              You: <span id="player-choice">__</span> | Computer:
+              <span>__</span> || Winner: <span id="result">__</span>
+            </p>
+          </div>
+          <div>
+            <p>
+              Round: <span id="round-current">1</span> /
+              <span id="round-count">10</span>
+            </p>
+          </div>
+          <div id="choice-buttons" class="choice-buttons">
+            <button data-value="rock">Rock</button>
+            <button data-value="paper">Paper</button>
+            <button data-value="scissors">Scissors</button>
+          </div>
+          <div>
+            <button id="back-button" class="back-button">Back to Menu</button>
+          </div>
+        </section>
+        <!-- Game Over Screen -->
+        <section id="game-over" class="game-over hidden">
+          <h1>Game Over</h1>
+          <h2>Player Score: <span id="go-ps"></span></h2>
+          <h2>Computer Score: <span id="go-cs"></span></h2>
+          <button id="go-bb" class="go-bb">Back to Menu</button>
+        </section>
+      </main>
+    </div>
+
     <script src="./main.js"></script>
   </body>
 </html>
