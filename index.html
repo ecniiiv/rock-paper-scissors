@@ -28,21 +28,24 @@
         <!-- Battle Field -->
         <section id="battle-field" class="hidden battle-field">
           <div id="board" class="board">
-            <p>
-              You: <span id="player-choice">__</span> | Computer:
-              <span>__</span> || Winner: <span id="result">__</span>
-            </p>
+            <div id="computer-board">
+              <img id="computer-choice" class="computer-choice" data-hand="" />
+            </div>
+            <div id="player-board">
+              <img id="player-choice" class="player-choice" data-hand="" />
+            </div>
           </div>
-          <div>
-            <p>
-              Round: <span id="round-current">1</span> /
-              <span id="round-count">10</span>
-            </p>
-          </div>
+          <div></div>
           <div id="choice-buttons" class="choice-buttons">
-            <button data-value="rock">Rock</button>
-            <button data-value="paper">Paper</button>
-            <button data-value="scissors">Scissors</button>
+            <button data-value="rock">
+              <img src="./images/rock.png" alt="Rock" />
+            </button>
+            <button data-value="paper">
+              <img src="./images/paper.png" alt="Paper" />
+            </button>
+            <button data-value="scissors">
+              <img src="./images/scissors.png" alt="Scissors" />
+            </button>
           </div>
           <div>
             <button id="back-button" class="back-button">Back to Menu</button>

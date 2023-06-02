@@ -10,10 +10,19 @@ const gameOverBackButton = document.querySelector("#go-bb");
 const gameOverPlayerScore = document.querySelector("#go-ps");
 const gameOverComputerScore = document.querySelector("#go-cs");
 
+const playerBoard = document.querySelector("#player-board");
+const playerBoardImg = document.querySelector("#player-choice");
+const computerBoard = document.querySelector("#computer-board");
+const computerBoardImg = document.querySelector("#computer-choice");
+
 let roundCounter = 0;
 let counter = 0;
 let playerScore = 0;
 let computerScore = 0;
+
+// INITIALIZE
+playerBoardImg.classList.add("hidden");
+computerBoardImg.classList.add("hidden");
 
 // EVENT LISTENERS
 roundCountButtons.forEach((btn) => {
@@ -35,6 +44,8 @@ playButton.addEventListener("click", () => {
 backButton.addEventListener("click", () => {
   battleFieldScreen.classList.toggle("hidden");
   menuScreen.classList.toggle("hidden");
+  playerBoardImg.classList.add("hidden");
+  computerBoardImg.classList.add("hidden");
   counter = 0;
   playerScore = 0;
   computerScore = 0;
@@ -44,6 +55,8 @@ backButton.addEventListener("click", () => {
 gameOverBackButton.addEventListener("click", () => {
   gameOverScreen.classList.toggle("hidden");
   menuScreen.classList.toggle("hidden");
+  playerBoardImg.classList.add("hidden");
+  computerBoardImg.classList.add("hidden");
   counter = 0;
   playerScore = 0;
   computerScore = 0;
@@ -53,7 +66,15 @@ gameOverBackButton.addEventListener("click", () => {
 choiceButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     const playerChoice = btn.dataset.value;
+    playerBoardImg.dataset.hand = `${btn.dataset.value}`;
     play(playerChoice, getComputerChoice(), roundCounter);
+    if (playerBoardImg.dataset.hand === "rock") {
+      playerBoardImg.src = "./images/rock.png";
+    } else if (playerBoardImg.dataset.hand === "paper") {
+      playerBoardImg.src = "./images/paper.png";
+    } else {
+      playerBoardImg.src = "./images/scissors.png";
+    }
   });
 });
 
@@ -74,13 +95,22 @@ function getComputerChoice() {
 function play(playerChoice, computerChoice, roundCount) {
   const player = playerChoice.toLowerCase();
   const computer = computerChoice.toLowerCase();
-  console.log(`You: ${player} vs. Computer: ${computer}`);
+  // computer hand rendering conditionals
+  computerBoardImg.dataset.hand = `${computer}`;
+  if (computerBoardImg.dataset.hand === "rock") {
+    computerBoardImg.src = "./images/rock.png";
+  } else if (computerBoardImg.dataset.hand === "paper") {
+    computerBoardImg.src = "./images/paper.png";
+  } else {
+    computerBoardImg.src = "./images/scissors.png";
+  }
+
+  // 'Who wins' conditionals
   if (
     (player === "rock" && computer === "scissors") ||
     (player === "scissors" && computer === "paper") ||
     (player === "paper" && computer === "rock")
   ) {
-    result.innerText = "Player";
     playerScore++;
     counter++;
     if (counter === +roundCount) {
@@ -91,29 +121,42 @@ function play(playerChoice, computerChoice, roundCount) {
     (computer === "scissors" && player === "paper") ||
     (computer === "paper" && player === "rock")
   ) {
-    result.innerText = "Computer";
     computerScore++;
     counter++;
     if (counter === +roundCount) {
       gameOver(playerScore, computerScore);
     }
   } else if (player === computer) {
-    result.innerText = "Draw";
     counter++;
     if (counter === +roundCount) {
       gameOver(playerScore, computerScore);
     }
   }
+  // test
+  console.log(`Player: ${playerScore} || Computer: ${computerScore}`);
+  // toggle image for both player
+  playerBoardImg.classList.remove("hidden");
+  computerBoardImg.classList.remove("hidden");
 }
 
 // GAME OVER
 function gameOver(playerScoreArgs, computerScoreArgs) {
-  gameOverPlayerScore.innerText = playerScoreArgs;
-  gameOverComputerScore.innerText = computerScoreArgs;
-  battleFieldScreen.classList.toggle("hidden");
-  gameOverScreen.classList.toggle("hidden");
-  counter = 0;
-  playerScore = 0;
-  computerScore = 0;
-  roundCounter = 0;
+  choiceButtons.forEach((btn) => {
+    btn.setAttribute("disabled", true);
+  });
+  backButton.setAttribute("disabled", true);
+  setTimeout(() => {
+    gameOverPlayerScore.innerText = playerScoreArgs;
+    gameOverComputerScore.innerText = computerScoreArgs;
+    battleFieldScreen.classList.toggle("hidden");
+    gameOverScreen.classList.toggle("hidden");
+    counter = 0;
+    playerScore = 0;
+    computerScore = 0;
+    roundCounter = 0;
+    backButton.removeAttribute("disabled");
+    choiceButtons.forEach((btn) => {
+      btn.removeAttribute("disabled");
+    });
+  }, 1500);
 }
