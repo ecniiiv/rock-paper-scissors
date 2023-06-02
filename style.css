@@ -42,14 +42,19 @@ header {
   width: 20em;
 }
 
-.menu button,
-.battle-field button {
+.menu button[data-count] {
   width: 7em;
   height: 2em;
   cursor: pointer;
   border: none;
   border-radius: 0.8em;
   background-color: #eee;
+}
+
+.battle-field button[data-value] {
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 .menu button[data-count]:focus {
@@ -67,6 +72,27 @@ header {
   background: white;
 }
 
+.battle-field button[data-value] img {
+  width: 5em;
+  height: 3em;
+}
+
+.board {
+  border: 1px solid teal;
+  width: 30em;
+  height: 30em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-choice,
+.computer-choice {
+  width: 8em;
+  height: 8em;
+}
 /*  */
 .hidden {
   display: none;
